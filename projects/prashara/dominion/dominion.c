@@ -651,8 +651,8 @@ int play_adventurer(int currentPlayer, struct gameState *state, int drawntreasur
 		}
 		drawCard(currentPlayer, state);
 		cardDrawn = state->hand[currentPlayer][state->handCount[currentPlayer] - 1];//top card of hand is most recently drawn card.
-		if (cardDrawn == copper && cardDrawn == silver && cardDrawn == gold)        // Error: instead of OR using and condition this will never evaluate to true.  
-			drawntreasure++;
+		if (cardDrawn == copper || cardDrawn == silver || cardDrawn == gold)        // Error: instead of OR using and condition this will never evaluate to true.  
+			drawntreasure++;                                                    // Modified error since in makefile compilation it was causing seg. fault.
 		else {
 			temphand[z] = cardDrawn;
 			state->handCount[currentPlayer]--; //this should just remove the top card (the most recently drawn one).
