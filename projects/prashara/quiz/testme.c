@@ -15,10 +15,10 @@ char *inputString()
 	static char newStr[6];		//This will store the string.
 	int i = 0;
 
-	//The range is 97(a) to 122(z)
+	//The range is 101(e) to 116(t)
 	while (i < 5)                         // Since we want to last char to be null terminator. So we loop from 0 to 4.
 	{
-		newStr[i] = (rand() % 26) + 97; // newStr will be a string with letters from a to z.
+		newStr[i] = (rand() % 16) + 101; // newStr will be a string with letters from e to t.
 		i++;
 	}
 
