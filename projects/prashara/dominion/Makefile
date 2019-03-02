@@ -1,4 +1,4 @@
-CFLAGS= -Wall -fpic -coverage -lm -std=c99
+CFLAGS = -Wall -std=c99 -fpic -coverage -lm
 
 rngs.o: rngs.h rngs.c
 	gcc -c rngs.c -g  $(CFLAGS)
@@ -35,5 +35,32 @@ player: player.c interface.o
 
 all: playdom player 
 
+randomtestcard1: playdom player randomtestcard1.c dominion.h
+	gcc -o randomtestcard1 randomtestcard1.c -g dominion.o rngs.o interface.o $(CFLAGS)
+
+randomtestcard2: playdom player randomtestcard2.c dominion.h
+	gcc -o randomtestcard2 randomtestcard2.c -g dominion.o rngs.o interface.o $(CFLAGS)
+
+randomtestadventurer: playdom player randomtestadventurer.c dominion.h
+	gcc -o randomtestadventurer randomtestadventurer.c -g dominion.o rngs.o interface.o $(CFLAGS)
+
+
+
+randomtestadventurertest: randomtestadventurer  
+	./randomtestadventurer >> randomtestadventurer.out
+	gcov -f -b dominion.c >> randomtestadventurer.out
+	cat dominion.c.gcov >> randomtestadventurer.out   
+	
+randomtestcard1test: randomtestcard1
+	./randomtestcard1 >> randomtestcard1.out
+	gcov -f -b dominion.c >> randomtestcard1.out
+	cat dominion.c.gcov >> randomtestcard1.out
+
+randomtestcard2test: randomtestcard2
+	./randomtestcard2 >> randomtestcard2.out
+	gcov -f -b dominion.c >> randomtestcard2.out
+	cat dominion.c.gcov >> randomtestcard2.out
+
 clean:
-	rm -f *.o playdom.exe playdom player player.exe  *.gcov *.gcda *.gcno *.so *.out testDrawCard testDrawCard.exe
+	rm -f *.o playdom.exe playdom player randomtestcard1 randomtestcard2 randomtestadventurer randomtestAdventurertest randomtestcard1test randomtestcard2test player.exe  *.gcov *.gcda *.gcno *.so *.out testDrawCard testDrawCard.exe
+

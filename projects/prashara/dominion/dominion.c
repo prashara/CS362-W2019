@@ -651,7 +651,7 @@ int play_adventurer(int currentPlayer, struct gameState *state, int drawntreasur
 		}
 		drawCard(currentPlayer, state);
 		cardDrawn = state->hand[currentPlayer][state->handCount[currentPlayer] - 1];//top card of hand is most recently drawn card.
-		if (cardDrawn == copper && cardDrawn == silver && cardDrawn == gold)        // Error: instead of OR using and condition this will never evaluate to true.  
+		if (cardDrawn == copper || cardDrawn == silver || cardDrawn == gold)        // Error: instead of OR using and condition this will never evaluate to true.  
 			drawntreasure++;
 		else {
 			temphand[z] = cardDrawn;
@@ -687,7 +687,7 @@ int play_village(int currentPlayer, struct gameState *state,int handPos) {
 	state->numActions = state->numActions + 2;
 
 	//discard played card from hand
-	discardCard(currentPlayer,handPos, state, 0); // Error: Both currentPlayer and handPos are of type integer it will cause problem during run-time.
+	discardCard(handPos, currentPlayer, state, 0); // Error: Both currentPlayer and handPos are of type integer it will cause problem during run-time.
 	return 0;
 }
 
